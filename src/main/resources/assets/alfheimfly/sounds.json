@@ -1,0 +1,17 @@
+{
+	"entity.sanglier.ambient": {
+		"category" : "entity",
+		"subtitle" : "entity.sanglier.ambient",
+		"sounds" : [{ "name" : "alfheimfly:sanglier/sanglier_ambient", "stream" : true}]
+	},
+	"entity.sanglier.hurt": {
+		"category" : "entity",
+		"subtitle" : "entity.sanglier.hurt",
+		"sounds" : [{ "name" : "alfheimfly:sanglier/sanglier_hurt", "stream" : true}]
+	},
+	"entity.sanglier.death": {
+		"category" : "entity",
+		"subtitle" : "entity.sanglier.death",
+		"sounds" : [{ "name" : "alfheimfly:sanglier/sanglier_death", "stream" : true}]
+	}
+}

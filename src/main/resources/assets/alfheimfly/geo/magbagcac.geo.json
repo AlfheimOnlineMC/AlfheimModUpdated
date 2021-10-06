@@ -1,0 +1,117 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.magbagcaca",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "Mob",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-8, 12, -8], "size": [16, 16, 13], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "pic",
+					"parent": "Mob",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-2, 26, -10], "size": [4, 3, 5], "pivot": [0, 0, 0], "rotation": [-15, 0, 0], "uv": [77, 0]},
+						{"origin": [-1.25, 29, -9.5], "size": [2.5, 2, 4], "pivot": [0, 0, 0], "rotation": [-15, 0, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "sack",
+					"parent": "Mob",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-7.5, 15, 4], "size": [15, 14, 8], "uv": [0, 29]},
+						{"origin": [6, 11, -9], "size": [1, 18, 15], "uv": [48, 14]},
+						{"origin": [-7, 11, -9], "size": [1, 18, 15], "uv": [31, 36]}
+					]
+				},
+				{
+					"name": "fire",
+					"parent": "Mob",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-8, 1, -2], "size": [16, 11, 0], "uv": [77, 77]},
+						{"origin": [-8, 1, 0], "size": [16, 11, 0], "pivot": [0, 0, 0], "rotation": [0, 90, 0], "uv": [45, 77]}
+					]
+				},
+				{
+					"name": "tete",
+					"parent": "Mob",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-6, 21, -14], "size": [12, 8, 8], "uv": [55, 61]},
+						{"origin": [-7, 16, -14], "size": [1, 8, 8], "inflate": 0.001, "uv": [0, 74]},
+						{"origin": [-6, 15.75, -14], "size": [12, 5, 8], "uv": [45, 0]},
+						{"origin": [6, 16, -14], "size": [1, 8, 8], "inflate": 0.01, "uv": [80, 27]}
+					]
+				},
+				{
+					"name": "ssG",
+					"parent": "tete",
+					"pivot": [3, 27, -14.5],
+					"cubes": [
+						{"origin": [0, 26, -15], "size": [6, 2, 1], "uv": [48, 47]}
+					]
+				},
+				{
+					"name": "ssD",
+					"parent": "tete",
+					"pivot": [-3, 27, -14.5],
+					"cubes": [
+						{"origin": [-6, 26, -15], "size": [6, 2, 1], "uv": [85, 8]}
+					]
+				},
+				{
+					"name": "brasD",
+					"parent": "Mob",
+					"pivot": [-8, 24, -1],
+					"cubes": [
+						{"origin": [-14.75, 9.25, -5.5], "size": [7, 6, 8], "uv": [63, 47]},
+						{"origin": [-14, 11, -5], "size": [6, 16, 7], "uv": [0, 51]}
+					]
+				},
+				{
+					"name": "pic3",
+					"parent": "brasD",
+					"pivot": [-13, 24.5, -1.5],
+					"rotation": [-35, -90, 0],
+					"cubes": [
+						{"origin": [-15, 21, -9], "size": [4, 4, 3], "pivot": [-13, -4, -1], "rotation": [-15, 0, 0], "uv": [38, 69]},
+						{"origin": [-14.25, 25, -8.5], "size": [2.5, 2, 2], "pivot": [-13, -4, -1], "rotation": [-15, 0, 0], "uv": [0, 6]}
+					]
+				},
+				{
+					"name": "brasG",
+					"parent": "Mob",
+					"pivot": [8, 24, -1],
+					"cubes": [
+						{"origin": [8, 11, -5], "size": [6, 16, 7], "uv": [19, 69]},
+						{"origin": [7.5, 9.25, -5.5], "size": [7, 6, 8], "uv": [65, 13]}
+					]
+				},
+				{
+					"name": "pic2",
+					"parent": "brasG",
+					"pivot": [13, 24.5, -1.5],
+					"rotation": [-35, 90, 0],
+					"cubes": [
+						{"origin": [11, 21, -9], "size": [4, 4, 3], "pivot": [13, -4, -1], "rotation": [-15, 0, 0], "uv": [85, 43]},
+						{"origin": [11.75, 25, -8.5], "size": [2.5, 2, 2], "pivot": [13, -4, -1], "rotation": [-15, 0, 0], "uv": [0, 29]}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,10 @@
+entity.sanglier.name=Boar
+itemGroup.Alfheim=Alfheim Tab
+item.boar_steak.name=Boar steak
+item.boar_leather.name=Boar leather
+item.cooked_boar_steak.name=Cooked boar steak
+item.holigan_sword.name=Holigan Sword
+attribute.name.alfheim.crit=Critical Chance
+attribute.name.alfheim.crit_dmg=Critical Damage
+attribute.name.alfheim.life_steal=Life Steal
+attribute.name.alfheim.def_pene=Armor Penetration

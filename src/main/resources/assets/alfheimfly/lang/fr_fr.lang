@@ -1,0 +1,10 @@
+entity.sanglier.name=Sanglier
+itemGroup.Alfheim=Alfheim Tab
+item.boar_steak.name=Steak de sanglier
+item.boar_leather.name=Cuir de sanglier
+item.cooked_boar_steak.name=Steak de sanglier cuit
+item.holigan_sword.name=Épée Holigan
+attribute.name.alfheim.crit=de taux critique
+attribute.name.alfheim.crit_dmg=de dégat critique
+attribute.name.alfheim.life_steal=de vol de vie
+attribute.name.alfheim.def_pene=pénétration d'armure

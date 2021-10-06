@@ -1,0 +1,13 @@
+{
+  "parent" : "item/handheld",
+  "textures" : {
+    "layer0" : "alfheimfly:items/cooked_boar_steak"
+  },
+	"display" : {
+		"thirdperson_righthand": {
+		  "rotation" : [ 0, 0, 90 ],
+		  "translation" : [ 0, 2.5, 1 ],
+	      "scale": [ 0.35, 0.35, 0.35 ]
+	    }
+	}
+}
