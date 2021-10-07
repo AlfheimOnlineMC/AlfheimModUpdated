@@ -4,7 +4,22 @@ item.boar_steak.name=Boar steak
 item.boar_leather.name=Boar leather
 item.cooked_boar_steak.name=Cooked boar steak
 item.holigan_sword.name=Holigan Sword
-attribute.name.alfheim.crit=Critical Chance
-attribute.name.alfheim.crit_dmg=Critical Damage
-attribute.name.alfheim.life_steal=Life Steal
-attribute.name.alfheim.def_pene=Armor Penetration
+attribute.name.alfheim.alfheim.crit=Critical Chance
+attribute.name.alfheim.alfheim.crit_dmg=Critical Damage
+attribute.name.alfheim.alfheim.life_steal=Life Steal
+attribute.name.alfheim.alfheim.def_pene=Armor Penetration
+attribute.name.alfheim.generic.movementSpeed=Speed
+attribute.name.alfheim.generic.attackDamage=Attack Damage
+attribute.name.alfheim.generic.attackSpeed=Attack Speed
+attribute.name.alfheim.generic.luck=Luck
+attribute.name.alfheim.generic.armor=Armor
+attribute.name.alfheim.generic.armorToughness=Armor Toughness
+
+attribute.alfheim.modifier.equals.0=%s %s
+attribute.alfheim.modifier.equals.1=%s %s%%
+attribute.alfheim.modifier.equals.2=%s %s%%
+
+tooltip.hold=Hold %s for more details
+tooltip.header.all=All Stats
+tooltip.header.equipment=Equipment Stats
+tooltip.header.rune=???? Stats

@@ -5,8 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import javax.imageio.ImageIO;
 
@@ -22,7 +21,9 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -128,6 +129,11 @@ public class AlfheimClient extends AlfheimCommon {
 
 	@SubscribeEvent
 	public void onToolTip(ItemTooltipEvent e) {
+		if(!(e.getItemStack().getItem() instanceof ItemSword) && !(e.getItemStack().getItem() instanceof ItemArmor)) {
+			e.getToolTip().add("");
+			e.getToolTip().add(ChatFormatting.BLUE + "Alfheim Online MMORPG");
+			return;
+		}
 		e.getToolTip().clear();
 
 		if(e.getItemStack().getItem() instanceof AlfheimItemSword) {
@@ -137,39 +143,141 @@ public class AlfheimClient extends AlfheimCommon {
 			e.getToolTip().add(e.getItemStack().getDisplayName());
 		}
 
+		HashMap<String, AttributeModifier> stats = new HashMap<>();
+		HashMap<String, AttributeModifier> statsRune = new HashMap<>();
+
 		e.getToolTip().add("");
-
-		if(e.getItemStack().getAttributeModifiers(EntityEquipmentSlot.MAINHAND).size() > 0) {
-			e.getToolTip().add("---===Effet en main===---");
-			e.getToolTip().add("");
-
-			for (Map.Entry<String, AttributeModifier> entry : e.getItemStack().getAttributeModifiers(EntityEquipmentSlot.MAINHAND).entries()) {
-				AttributeModifier attributeModifier = entry.getValue();
-				double d0 = attributeModifier.getAmount();
-
-				if (e.getEntityPlayer() != null) {
-					if (attributeModifier.getID().equals(UUID.fromString("cb3f55d3-645c-4f38-a497-9c13a33db5cf"))) {
-						d0 += e.getEntityPlayer().getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
-						d0 += EnchantmentHelper.getModifierForCreature(e.getItemStack(), EnumCreatureAttribute.UNDEFINED);
-					} else if (attributeModifier.getID().equals(UUID.fromString("fa233e1c-4180-4865-b01b-bcce9785aca3"))) {
-						d0 += e.getEntityPlayer().getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).getBaseValue();
+		if(e.getItemStack().getItem() instanceof ItemSword) {
+			if(e.getItemStack().getAttributeModifiers(EntityEquipmentSlot.MAINHAND).size() > 0) {
+				for (Map.Entry<String, AttributeModifier> entry : e.getItemStack().getAttributeModifiers(EntityEquipmentSlot.MAINHAND).entries()) {
+					AttributeModifier att = entry.getValue();
+					if(att.getName().contains("rune")) {
+						statsRune.put(entry.getKey(), att);
+					} else {
+						stats.put(entry.getKey(), att);
 					}
 				}
 
-				double d1;
+				if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+					e.getToolTip().add(ChatFormatting.GOLD + "" + ChatFormatting.STRIKETHROUGH + "     " + ChatFormatting.GOLD + "»" + ChatFormatting.BLUE + " " + I18n.translateToLocal("tooltip.header.equipment") + " " + ChatFormatting.GOLD + "«" + ChatFormatting.STRIKETHROUGH  +"     ");
+					e.getToolTip().add("");
 
-				if (attributeModifier.getOperation() != 1 && attributeModifier.getOperation() != 2) {
-					d1 = d0;
+					this.displayStats(stats, e.getToolTip(), e);
+
+					e.getToolTip().add("");
+					e.getToolTip().add(ChatFormatting.GOLD + "" + ChatFormatting.STRIKETHROUGH + "     " + ChatFormatting.GOLD + "»" + ChatFormatting.BLUE + " " + I18n.translateToLocal("tooltip.header.rune") + " " + ChatFormatting.GOLD + "«" + ChatFormatting.STRIKETHROUGH  +"     ");
+					e.getToolTip().add("");
+
+					this.displayStats(statsRune, e.getToolTip(), e);
+
+					e.getToolTip().add("");
 				} else {
-					d1 = d0 * 100.0D;
+					e.getToolTip().add(ChatFormatting.GOLD + "" + ChatFormatting.STRIKETHROUGH + "     " + ChatFormatting.GOLD + "»" + ChatFormatting.BLUE + " " + I18n.translateToLocal("tooltip.header.all") + " " + ChatFormatting.GOLD + "«" + ChatFormatting.STRIKETHROUGH  +"     ");
+					e.getToolTip().add("");
+					this.displayOverallStats(EntityEquipmentSlot.MAINHAND, e);
+					e.getToolTip().add(ChatFormatting.DARK_GRAY + I18n.translateToLocalFormatted("tooltip.hold", Keyboard.getKeyName(Keyboard.KEY_LSHIFT)));
+				}
+			}
+		} else if(e.getItemStack().getItem() instanceof ItemArmor) {
+			EntityEquipmentSlot type = ((ItemArmor) e.getItemStack().getItem()).armorType;
+			if(e.getItemStack().getAttributeModifiers(type).size() > 0) {
+				for (Map.Entry<String, AttributeModifier> entry : e.getItemStack().getAttributeModifiers(type).entries()) {
+					AttributeModifier att = entry.getValue();
+					if(att.getName().contains("rune")) {
+						statsRune.put(entry.getKey(), att);
+					} else {
+						stats.put(entry.getKey(), att);
+					}
 				}
 
-				e.getToolTip().add(" " + I18n.translateToLocalFormatted("attribute.modifier.equals." + attributeModifier.getOperation(), ItemStack.DECIMALFORMAT.format(d1), I18n.translateToLocal("attribute.name." + entry.getKey())));
+				if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+					e.getToolTip().add(ChatFormatting.GOLD + "" + ChatFormatting.STRIKETHROUGH + "     " + ChatFormatting.GOLD + "»" + ChatFormatting.BLUE + " " + I18n.translateToLocal("tooltip.header.equipment") + " " + ChatFormatting.GOLD + "«" + ChatFormatting.STRIKETHROUGH  +"     ");
+					e.getToolTip().add("");
+
+					this.displayStats(stats, e.getToolTip(), e);
+
+					e.getToolTip().add("");
+					e.getToolTip().add(ChatFormatting.GOLD + "" + ChatFormatting.STRIKETHROUGH + "     " + ChatFormatting.GOLD + "»" + ChatFormatting.BLUE + " " + I18n.translateToLocal("tooltip.header.rune") + " " + ChatFormatting.GOLD + "«" + ChatFormatting.STRIKETHROUGH  +"     ");
+					e.getToolTip().add("");
+
+					this.displayStats(statsRune, e.getToolTip(), e);
+
+					e.getToolTip().add("");
+				} else {
+					e.getToolTip().add(ChatFormatting.GOLD + "" + ChatFormatting.STRIKETHROUGH + "     " + ChatFormatting.GOLD + "»" + ChatFormatting.BLUE + " " + I18n.translateToLocal("tooltip.header.all") + " " + ChatFormatting.GOLD + "«" + ChatFormatting.STRIKETHROUGH  +"     ");
+					e.getToolTip().add("");
+					this.displayOverallStats(type, e);
+					e.getToolTip().add(ChatFormatting.DARK_GRAY + I18n.translateToLocalFormatted("tooltip.hold", Keyboard.getKeyName(Keyboard.KEY_LSHIFT)));
+				}
 			}
-			e.getToolTip().add("");
+		}
+		e.getToolTip().add("");
+		e.getToolTip().add(ChatFormatting.BLUE + "Alfheim Online MMORPG");
+	}
+
+	private void displayStats(HashMap<String, AttributeModifier> map, List<String> lore, ItemTooltipEvent e) {
+		double d0;
+		for(Map.Entry<String, AttributeModifier> attRune : map.entrySet()) {
+			d0 = attRune.getValue().getAmount();
+
+			if(e.getEntityPlayer() != null) {
+				if(attRune.getValue().getID().equals(UUID.fromString("cb3f55d3-645c-4f38-a497-9c13a33db5cf"))) {
+					d0 += e.getEntityPlayer().getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+				} else if (attRune.getValue().getID().equals(UUID.fromString("fa233e1c-4180-4865-b01b-bcce9785aca3"))) {
+					d0 += e.getEntityPlayer().getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).getBaseValue();
+				}
+			}
+			if(d0 <= 0D) continue;
+
+			double d1;
+
+			if (attRune.getValue().getOperation() != 1 && attRune.getValue().getOperation() != 2) {
+				d1 = d0;
+			} else {
+				d1 = d0 * 100.0D;
+			}
+
+			lore.add(I18n.translateToLocalFormatted("attribute.alfheim.modifier.equals." + attRune.getValue().getOperation(), ChatFormatting.BOLD + "> " + ChatFormatting.DARK_AQUA + I18n.translateToLocal("attribute.name.alfheim." + attRune.getKey()) + ":", ChatFormatting.GRAY + ItemStack.DECIMALFORMAT.format(d1)));
+		}
+	}
+
+	private void displayOverallStats(EntityEquipmentSlot type, ItemTooltipEvent e) {
+		ItemStack item = e.getItemStack();
+		HashMap<String, Double> stats = new HashMap<>();
+
+		for(Map.Entry<String, AttributeModifier> att : item.getAttributeModifiers(type).entries()) {
+			double d0 = att.getValue().getAmount();
+
+			if(e.getEntityPlayer() != null) {
+				if(att.getValue().getID().equals(UUID.fromString("cb3f55d3-645c-4f38-a497-9c13a33db5cf"))) {
+					d0 += e.getEntityPlayer().getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+				} else if (att.getValue().getID().equals(UUID.fromString("fa233e1c-4180-4865-b01b-bcce9785aca3"))) {
+					d0 += e.getEntityPlayer().getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).getBaseValue();
+				}
+			}
+
+			if(stats.containsKey(att.getKey() + att.getValue().getOperation())) {
+				stats.put(att.getKey() + att.getValue().getOperation(), stats.get(att.getKey() + att.getValue().getOperation()) + att.getValue().getAmount());
+			} else {
+				stats.put(att.getKey() + att.getValue().getOperation(), d0);
+			}
 		}
 
-		e.getToolTip().add(ChatFormatting.BLUE + "Alfheim Online MMORPG");
+		for(Map.Entry<String, Double> statsOverall : stats.entrySet()) {
+			double d1;
+			String name = statsOverall.getKey().substring(0, statsOverall.getKey().length() - 1);
+			int operation = Integer.valueOf(statsOverall.getKey().substring(statsOverall.getKey().length() - 1));
+
+			if(statsOverall.getValue() <= 0D) continue;
+
+			if (operation != 1 && operation != 2) {
+				d1 = statsOverall.getValue();
+			} else {
+				d1 = statsOverall.getValue() * 100.0D;
+			}
+
+			e.getToolTip().add(I18n.translateToLocalFormatted("attribute.alfheim.modifier.equals." + operation, ChatFormatting.BOLD + "> " + ChatFormatting.DARK_AQUA + I18n.translateToLocal("attribute.name.alfheim." + name) + ":", ChatFormatting.GRAY + ItemStack.DECIMALFORMAT.format(d1)));
+		}
 	}
 
 	private void loadWings() {

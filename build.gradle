@@ -3,6 +3,7 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
+        mavenLocal()
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
@@ -60,13 +61,18 @@ minecraft {
 
 repositories {
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    mavenLocal()
 }
 
 dependencies {
+    configurations {
+        shade
+        compile.extendsFrom shade
+    }
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2855'
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2855-alo'
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
@@ -86,7 +92,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    implementation fg.deobf('software.bernie.geckolib:forge-1.12.2-geckolib:3.0.0-beta.7')
+    shade fg.deobf('software.bernie.geckolib:forge-1.12.2-geckolib:3.0.0-beta.8')
     implementation fileTree(dir: "libs", include: ["*.jar"])
 }
 
@@ -102,6 +108,11 @@ jar {
             "Implementation-Vendor" :"examplemodsareus",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
+    }
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude 'META-INF', 'META-INF/**'
+        }
     }
 }
 
@@ -124,4 +135,5 @@ publishing {
     }
 }
 
+// Remove on build
 sourceSets {main { output.resourcesDir = output.classesDir }}

@@ -10,7 +10,7 @@ import net.minecraft.util.DamageSource;
 
 public class DamageCalculatorHelper {
 
-    public static double getDamage(EntityLivingBase entity, DamageSource dmgSrc, double damageAmount, int def_pene) {
+    public static double getDamage(EntityLivingBase entity, DamageSource dmgSrc, double damageAmount, double def_pene) {
         damageAmount = applyArmorCalculations(entity, dmgSrc, (float) damageAmount, def_pene);
         damageAmount = applyPotionDamageCalculations(entity, dmgSrc, (float) damageAmount);
         float f = (float) damageAmount;
@@ -20,12 +20,12 @@ public class DamageCalculatorHelper {
         return damageAmount;
     }
 
-    private static float applyArmorCalculations(EntityLivingBase entity, DamageSource source, float damage, int def_pene) {
+    private static float applyArmorCalculations(EntityLivingBase entity, DamageSource source, float damage, double def_pene) {
         if (!source.isUnblockable()) {
             if(entity instanceof EntityPlayer) {
                 ((EntityPlayer)entity).inventory.damageArmor(damage);
             }
-            damage = CombatRules.getDamageAfterAbsorb(damage, Math.max(entity.getTotalArmorValue() - def_pene, 0F), (float)entity.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).getAttributeValue());
+            damage = CombatRules.getDamageAfterAbsorb(damage, (float) Math.max(entity.getTotalArmorValue() - def_pene, 0F), (float)entity.getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).getAttributeValue());
         }
 
         return damage;

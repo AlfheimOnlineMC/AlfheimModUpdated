@@ -12,6 +12,7 @@ import fr.augma.alfheimfly.items.AlfheimItemSword;
 import fr.augma.alfheimfly.packet.GuiClassOpen;
 import fr.augma.alfheimfly.packet.RefreshCaitPlayer;
 import fr.augma.alfheimfly.packet.SyncWingsPacket;
+import fr.augma.alfheimfly.utils.AlfheimRef;
 import fr.augma.alfheimfly.utils.DamageCalculatorHelper;
 import fr.augma.alfheimfly.utils.RuneUtils;
 import fr.augma.alfheimfly.utils.SwordExperienceManager;
@@ -43,12 +44,11 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import scala.tools.nsc.Global;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = AlfheimRef.MODID)
 public class CommonEventHandler {
 
 	private static IPlayerDataCap cap;
 	public static List<String> caitPlayerServ = new ArrayList<>();
-	public static HashMap<UUID, Float> damageMap = new HashMap<>();
 	
 	@SubscribeEvent
     public static void onAttachCapability(AttachCapabilitiesEvent<Entity> event) {
@@ -147,8 +147,7 @@ public class CommonEventHandler {
 
 			double 	percentage = 0D,
 					dmgMultiplier = 0D,
-					lifeSteal = 0D,
-					def_pene = 0D;
+					lifeSteal = 0D;
 
 			for(Map.Entry<String, AttributeModifier> att : item.getAttributeModifiers(EntityEquipmentSlot.MAINHAND).entries()) {
 				if(att.getValue().getID().equals(RuneUtils.ATTRIBUTE_CRIT_ID)) {
@@ -157,8 +156,6 @@ public class CommonEventHandler {
 					dmgMultiplier += att.getValue().getAmount();
 				} else if(att.getValue().getID().equals(RuneUtils.ATTRIBUTE_LIFE_STEAL_ID)) {
 					lifeSteal += att.getValue().getAmount();
-				} else if(att.getValue().getID().equals(RuneUtils.ATTRIBUTE_DEF_PENE_ID)) {
-					def_pene += att.getValue().getAmount();
 				}
 			}
 
@@ -168,24 +165,30 @@ public class CommonEventHandler {
 
 			if(Math.random() <= percentage) {
 				e.setAmount((float) (e.getAmount() * dmgMultiplier));
-				player.sendMessage(new TextComponentString("" + e.getAmount()));
 			}
 
 			if(e.getAmount() * lifeSteal != 0D) {
 				player.sendMessage(new TextComponentString("Vous avez été heal de " + (e.getAmount() * lifeSteal) + " HP"));
 				player.heal((float) (e.getAmount() * lifeSteal));
 			}
-
-			double damage = DamageCalculatorHelper.getDamage(e.getEntityLiving(), e.getSource(), e.getAmount(), (int) def_pene);
-			player.sendMessage(new TextComponentString("" + (damage)));
-			damageMap.put(e.getEntityLiving().getUniqueID(), (float) damage);
 		}
 	}
 
 	@SubscribeEvent
 	public static void onLivingDamage(LivingDamageEvent event) {
-		if(!damageMap.containsKey(event.getEntityLiving().getUniqueID())) return;
-		event.setAmount(damageMap.get(event.getEntityLiving().getUniqueID()));
-		damageMap.remove(event.getEntityLiving().getUniqueID());
+		if(event.getSource().getTrueSource() instanceof EntityPlayer) {
+			double def_pene = 0D;
+			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
+			ItemStack item = player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+
+			for(Map.Entry<String, AttributeModifier> att : item.getAttributeModifiers(EntityEquipmentSlot.MAINHAND).entries()) {
+				if(att.getValue().getID().equals(RuneUtils.ATTRIBUTE_DEF_PENE_ID) || att.getValue().getName().equalsIgnoreCase("def_pene_rune")) {
+					def_pene += att.getValue().getAmount();
+				}
+			}
+
+			double dmg = DamageCalculatorHelper.getDamage(event.getEntityLiving(), event.getSource(), event.getBrutDmg(), def_pene);
+			event.setAmount((float) dmg);
+		}
 	}
 }

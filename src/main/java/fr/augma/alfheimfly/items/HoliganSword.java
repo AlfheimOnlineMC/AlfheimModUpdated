@@ -2,7 +2,6 @@ package fr.augma.alfheimfly.items;
 
 import java.util.List;
 
-import fr.augma.alfheimfly.client.item.renderer.HoliganItemRenderer;
 import fr.augma.alfheimfly.client.skin.IHasSkin;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;

@@ -35,6 +35,7 @@ public class testRune extends CommandBase {
         AttributeModifier attcritdmg = new AttributeModifier(RuneUtils.ATTRIBUTE_CRIT_DMG_ID, "crit_dmg", 1.5D, 1);
         AttributeModifier attlifesteal = new AttributeModifier(RuneUtils.ATTRIBUTE_LIFE_STEAL_ID, "life_steal", 0.1D, 1);
         AttributeModifier attdef_pene = new AttributeModifier(RuneUtils.ATTRIBUTE_DEF_PENE_ID, "def_pene", 2D, 0);
+        AttributeModifier attdef_pene_rune = new AttributeModifier(UUID.randomUUID(), "def_pene_rune", 1D, 0);
 
 
         item.getAttributeModifiers(EntityEquipmentSlot.MAINHAND).forEach((s, attributeModifier) -> item.addAttributeModifier(s, attributeModifier, EntityEquipmentSlot.MAINHAND));
@@ -43,5 +44,6 @@ public class testRune extends CommandBase {
         item.addAttributeModifier(RuneUtils.CRIT_DMG.getName(), attcritdmg, EntityEquipmentSlot.MAINHAND);
         item.addAttributeModifier(RuneUtils.LIFE_STEAL.getName(), attlifesteal, EntityEquipmentSlot.MAINHAND);
         item.addAttributeModifier(RuneUtils.DEF_PENE.getName(), attdef_pene, EntityEquipmentSlot.MAINHAND);
+        item.addAttributeModifier(RuneUtils.DEF_PENE.getName(), attdef_pene_rune, EntityEquipmentSlot.MAINHAND);
     }
 }

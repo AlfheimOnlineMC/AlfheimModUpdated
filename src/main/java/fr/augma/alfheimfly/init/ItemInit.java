@@ -5,7 +5,6 @@ import fr.augma.alfheimfly.items.AlfheimItemBasic;
 import fr.augma.alfheimfly.items.AlfheimItemFoodBasic;
 import fr.augma.alfheimfly.items.AlfheimItemSword;
 import fr.augma.alfheimfly.items.ChapkaItem;
-import fr.augma.alfheimfly.items.ClassicArmorItem;
 import fr.augma.alfheimfly.items.EnumItemRarity;
 import fr.augma.alfheimfly.items.EtronItem;
 import fr.augma.alfheimfly.items.HoliganSword;
