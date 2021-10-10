@@ -2,6 +2,7 @@ package fr.augma.alfheimfly;
 
 import fr.augma.alfheimfly.capabilities.PlayerDataCapProvider;
 import fr.augma.alfheimfly.command.RaceRemoveCommand;
+import fr.augma.alfheimfly.command.polish;
 import fr.augma.alfheimfly.command.setSkin;
 import fr.augma.alfheimfly.command.testRune;
 import fr.augma.alfheimfly.common.AlfheimCommon;
@@ -97,6 +98,7 @@ public class AlfheimFly {
     	event.registerServerCommand(new RaceRemoveCommand());
     	event.registerServerCommand(new setSkin());
     	event.registerServerCommand(new testRune());
+        event.registerServerCommand(new polish());
     }
     
     private static void initEntityExpValue() {

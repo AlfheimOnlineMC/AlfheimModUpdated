@@ -2,6 +2,8 @@ package fr.augma.alfheimfly.items;
 
 import fr.augma.alfheimfly.AlfheimFly;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;

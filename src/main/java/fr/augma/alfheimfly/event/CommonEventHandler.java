@@ -19,6 +19,7 @@ import fr.augma.alfheimfly.utils.SwordExperienceManager;
 import fr.augma.alfheimfly.utils.race.CaitSith;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -32,6 +33,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -143,21 +145,12 @@ public class CommonEventHandler {
 	public static void onHitEntity(LivingHurtEvent e) {
 		if(e.getSource().getTrueSource() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) e.getSource().getTrueSource();
-			ItemStack item = player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
 
-			double 	percentage = 0D,
-					dmgMultiplier = 0D,
-					lifeSteal = 0D;
+			double 	percentage = player.getEntityAttribute(RuneUtils.CRIT).getAttributeValue(),
+					dmgMultiplier = player.getEntityAttribute(RuneUtils.CRIT_DMG).getAttributeValue() - 1D,
+					lifeSteal = player.getEntityAttribute(RuneUtils.LIFE_STEAL).getAttributeValue();
 
-			for(Map.Entry<String, AttributeModifier> att : item.getAttributeModifiers(EntityEquipmentSlot.MAINHAND).entries()) {
-				if(att.getValue().getID().equals(RuneUtils.ATTRIBUTE_CRIT_ID)) {
-					percentage = att.getValue().getAmount();
-				} else if(att.getValue().getID().equals(RuneUtils.ATTRIBUTE_CRIT_DMG_ID)) {
-					dmgMultiplier += att.getValue().getAmount();
-				} else if(att.getValue().getID().equals(RuneUtils.ATTRIBUTE_LIFE_STEAL_ID)) {
-					lifeSteal += att.getValue().getAmount();
-				}
-			}
+			System.out.println(lifeSteal);
 
 			if(dmgMultiplier == 0D) {
 				dmgMultiplier = 1.1D;
@@ -171,6 +164,7 @@ public class CommonEventHandler {
 				player.sendMessage(new TextComponentString("Vous avez été heal de " + (e.getAmount() * lifeSteal) + " HP"));
 				player.heal((float) (e.getAmount() * lifeSteal));
 			}
+			//System.out.println(e.getAmount());
 		}
 	}
 
@@ -179,16 +173,23 @@ public class CommonEventHandler {
 		if(event.getSource().getTrueSource() instanceof EntityPlayer) {
 			double def_pene = 0D;
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-			ItemStack item = player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
 
-			for(Map.Entry<String, AttributeModifier> att : item.getAttributeModifiers(EntityEquipmentSlot.MAINHAND).entries()) {
-				if(att.getValue().getID().equals(RuneUtils.ATTRIBUTE_DEF_PENE_ID) || att.getValue().getName().equalsIgnoreCase("def_pene_rune")) {
-					def_pene += att.getValue().getAmount();
-				}
-			}
 
-			double dmg = DamageCalculatorHelper.getDamage(event.getEntityLiving(), event.getSource(), event.getBrutDmg(), def_pene);
+			double dmg = DamageCalculatorHelper.getDamage(event.getEntityLiving(), event.getSource(), event.getBrutDmg(), player.getEntityAttribute(RuneUtils.DEF_PENE).getAttributeValue());
+			System.out.println(event.getAmount());
 			event.setAmount((float) dmg);
+			System.out.println(event.getAmount());
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityConstructing(EntityEvent.EntityConstructing e) {
+		if(e.getEntity() instanceof EntityPlayer) {
+			EntityPlayer ep = (EntityPlayer) e.getEntity();
+			ep.getAttributeMap().registerAttribute(RuneUtils.CRIT);
+			ep.getAttributeMap().registerAttribute(RuneUtils.CRIT_DMG);
+			ep.getAttributeMap().registerAttribute(RuneUtils.DEF_PENE);
+			ep.getAttributeMap().registerAttribute(RuneUtils.LIFE_STEAL);
 		}
 	}
 }

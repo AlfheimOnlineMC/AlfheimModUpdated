@@ -1,18 +1,7 @@
 package fr.augma.alfheimfly.init;
 
 import fr.augma.alfheimfly.client.item.renderer.HoliganItemRenderer;
-import fr.augma.alfheimfly.items.AlfheimItemBasic;
-import fr.augma.alfheimfly.items.AlfheimItemFoodBasic;
-import fr.augma.alfheimfly.items.AlfheimItemSword;
-import fr.augma.alfheimfly.items.ChapkaItem;
-import fr.augma.alfheimfly.items.EnumItemRarity;
-import fr.augma.alfheimfly.items.EtronItem;
-import fr.augma.alfheimfly.items.HoliganSword;
-import fr.augma.alfheimfly.items.MArmorItem;
-import fr.augma.alfheimfly.items.QuatorzeArmorItem;
-import fr.augma.alfheimfly.items.RuneItem;
-import fr.augma.alfheimfly.items.StartArmorItem;
-import fr.augma.alfheimfly.items.StartArmorMossyItem;
+import fr.augma.alfheimfly.items.*;
 import fr.augma.alfheimfly.utils.AlfheimRef;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -109,11 +98,11 @@ public class ItemInit {
         rune_mythique = new RuneItem("rune_mythique");
         rune_unique = new RuneItem("rune_unique");
         
-        rune_commun_unpolished = new RuneItem("rune_commun_unpolished");
-        rune_rare_unpolished = new RuneItem("rune_rare_unpolished");
-        rune_epique_unpolished = new RuneItem("rune_epique_unpolished");
-        rune_mythique_unpolished = new RuneItem("rune_mythique_unpolished");
-        rune_unique_unpolished = new RuneItem("rune_unique_unpolished");
+        rune_commun_unpolished = new RuneUnpolishedItem("rune_commun_unpolished", rune_commun);
+        rune_rare_unpolished = new RuneUnpolishedItem("rune_rare_unpolished", rune_rare);
+        rune_epique_unpolished = new RuneUnpolishedItem("rune_epique_unpolished", rune_epique);
+        rune_mythique_unpolished = new RuneUnpolishedItem("rune_mythique_unpolished", rune_mythique);
+        rune_unique_unpolished = new RuneUnpolishedItem("rune_unique_unpolished", rune_unique);
         
         rune_commun_block = new ItemBlock(BlockInit.RUNE_COMMUN).setRegistryName(BlockInit.RUNE_COMMUN.getRegistryName());
         rune_rare_block = new ItemBlock(BlockInit.RUNE_RARE).setRegistryName(BlockInit.RUNE_RARE.getRegistryName());

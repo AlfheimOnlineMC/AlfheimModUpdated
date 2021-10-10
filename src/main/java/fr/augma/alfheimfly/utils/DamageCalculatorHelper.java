@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.CombatRules;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 
 public class DamageCalculatorHelper {
 
@@ -16,9 +17,9 @@ public class DamageCalculatorHelper {
         float f = (float) damageAmount;
         damageAmount = Math.max(damageAmount - entity.getAbsorptionAmount(), 0.0F);
         entity.setAbsorptionAmount((float) (entity.getAbsorptionAmount() - (f - damageAmount)));
-
         return damageAmount;
     }
+
 
     private static float applyArmorCalculations(EntityLivingBase entity, DamageSource source, float damage, double def_pene) {
         if (!source.isUnblockable()) {

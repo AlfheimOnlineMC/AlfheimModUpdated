@@ -14,6 +14,8 @@ attribute.name.alfheim.generic.attackSpeed=Attack Speed
 attribute.name.alfheim.generic.luck=Luck
 attribute.name.alfheim.generic.armor=Armor
 attribute.name.alfheim.generic.armorToughness=Armor Toughness
+attribute.name.alfheim.generic.knockbackResistance=Knockback Resistance
+attribute.name.alfheim.generic.maxHealth=Max Health
 
 attribute.alfheim.modifier.equals.0=%s %s
 attribute.alfheim.modifier.equals.1=%s %s%%

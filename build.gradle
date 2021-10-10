@@ -92,7 +92,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    shade fg.deobf('software.bernie.geckolib:forge-1.12.2-geckolib:3.0.0-beta.8')
+    shade fg.deobf('software.bernie.geckolib:forge-1.12.2-geckolib:3.0.0-beta.7')
     implementation fileTree(dir: "libs", include: ["*.jar"])
 }
 
