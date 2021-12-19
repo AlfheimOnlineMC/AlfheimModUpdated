@@ -4,10 +4,10 @@ import net.minecraft.item.Item;
 
 public class RuneUnpolishedItem extends RuneItem {
 
-    private RuneItem runeUnpolished;
+    private final RuneItem runeUnpolished;
 
     public RuneUnpolishedItem(String name, Item unpolished) {
-        super(name);
+        super(name, ((RuneItem) unpolished).getRarity());
         this.runeUnpolished = (RuneItem) unpolished;
     }
 

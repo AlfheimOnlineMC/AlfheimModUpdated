@@ -4,7 +4,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "alfheimfly:block/rune_ore",
-		"1": "alfheimfly:items/rune_unique",
+		"1": "alfheimfly:items/rune_bloc_unique",
 		"particle": "alfheimfly:block/rune_ore"
 	},
 	"elements": [

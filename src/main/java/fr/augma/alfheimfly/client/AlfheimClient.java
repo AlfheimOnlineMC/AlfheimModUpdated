@@ -53,6 +53,7 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 public class AlfheimClient extends AlfheimCommon {
 	private static IPCClient client;
 	private static final ResourceLocation[] wings = new ResourceLocation[18];
+
 	private static final Comparator<String> comparator = new Comparator<String>() {
 		@Override
 		public int compare(String o1, String o2) {

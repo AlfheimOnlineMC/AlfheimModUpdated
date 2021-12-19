@@ -1,5 +1,6 @@
 package fr.augma.alfheimfly.utils;
 
+import fr.augma.alfheimfly.items.EnumItemRarity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -25,33 +26,60 @@ public class RuneUtils {
     }
 
     public enum RuneStatsType {
-        ATTACK(SharedMonsterAttributes.ATTACK_DAMAGE),
-        CRIT(RuneUtils.CRIT),
-        CRIT_DMG(RuneUtils.CRIT_DMG),
-        LIFE_STEAL(RuneUtils.LIFE_STEAL),
-        DEF_PENE(RuneUtils.DEF_PENE),
-        ATTACK_SPEED(SharedMonsterAttributes.ATTACK_SPEED),
-        SPEED(SharedMonsterAttributes.MOVEMENT_SPEED),
-        MAX_HEALTH(SharedMonsterAttributes.MAX_HEALTH),
-        ARMOR(SharedMonsterAttributes.ARMOR),
-        ARMOR_TOUGHNESS(SharedMonsterAttributes.ARMOR_TOUGHNESS),
-        LUCK(SharedMonsterAttributes.LUCK),
-        KNOCKBACK_RESISTANCE(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
+        ATTACK(SharedMonsterAttributes.ATTACK_DAMAGE, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        CRIT(RuneUtils.CRIT, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        CRIT_DMG(RuneUtils.CRIT_DMG, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        LIFE_STEAL(RuneUtils.LIFE_STEAL, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        DEF_PENE(RuneUtils.DEF_PENE, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        ATTACK_SPEED(SharedMonsterAttributes.ATTACK_SPEED, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        SPEED(SharedMonsterAttributes.MOVEMENT_SPEED, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        MAX_HEALTH(SharedMonsterAttributes.MAX_HEALTH, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        ARMOR(SharedMonsterAttributes.ARMOR, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        ARMOR_TOUGHNESS(SharedMonsterAttributes.ARMOR_TOUGHNESS, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        LUCK(SharedMonsterAttributes.LUCK, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5)),
+        KNOCKBACK_RESISTANCE(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, getRange(0, 1, 1, 2, 2, 3, 3, 4, 4, 5));
 
-        RuneStatsType (IAttribute attrib) {
+        RuneStatsType (IAttribute attrib, HashMap<EnumItemRarity, int[]> range) {
             this.attributes = attrib;
+            this.range = range;
         }
 
         IAttribute attributes;
+        HashMap<EnumItemRarity, int[]> range;
 
         IAttribute getAttribute() {
             return this.attributes;
+        }
+        public HashMap<EnumItemRarity, int[]> getRange() { return this.range; }
+
+        static HashMap<EnumItemRarity, int[]> getRange(int... range) {
+            HashMap<EnumItemRarity, int[]> hashMapRange = new HashMap<>();
+            int i = 0;
+            for(EnumItemRarity rarity : EnumItemRarity.values()) {
+                int[] statsRange = new int[] {range[i], range[i+1]};
+                i += 2;
+                hashMapRange.put(rarity, statsRange);
+            }
+
+            return hashMapRange;
+        }
+
+        public static RuneStatsType getByAttributeName(String attributeName) {
+            RuneStatsType resType = null;
+            for(RuneStatsType type : RuneStatsType.values()) {
+                if(type.getAttribute().getName().equalsIgnoreCase(attributeName)) {
+                    resType = type;
+                    break;
+                }
+            }
+
+            return resType;
         }
     }
 
     public enum RuneType {
         SWORD(Arrays.asList(RuneStatsType.ATTACK, RuneStatsType.ATTACK_SPEED, RuneStatsType.LUCK, RuneStatsType.CRIT, RuneStatsType.CRIT_DMG, RuneStatsType.DEF_PENE, RuneStatsType.LIFE_STEAL)),
-        ARMOR(Arrays.asList(RuneStatsType.ARMOR_TOUGHNESS, RuneStatsType.ARMOR, RuneStatsType.LUCK, RuneStatsType.KNOCKBACK_RESISTANCE, RuneStatsType.SPEED, RuneStatsType.MAX_HEALTH));
+        ARMOR(Arrays.asList(RuneStatsType.ARMOR_TOUGHNESS, RuneStatsType.ARMOR, RuneStatsType.KNOCKBACK_RESISTANCE, RuneStatsType.SPEED, RuneStatsType.MAX_HEALTH));
 
         RuneType(List<RuneStatsType> attr) {
             this.attr = attr;

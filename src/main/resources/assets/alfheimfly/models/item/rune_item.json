@@ -1,0 +1,10 @@
+{
+	"parent" : "item/handheld",
+	"display" : {
+		"thirdperson_righthand": {
+		  "rotation" : [ -90, 90, 0 ],
+		  "translation" : [ 0, 2, 1 ],
+	      "scale": [ 0.35, 0.35, 0.35 ]
+	    }
+	}
+}

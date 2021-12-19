@@ -92,11 +92,11 @@ public class ItemInit {
         vodka = new ItemBlock(BlockInit.VODKA).setRegistryName(BlockInit.VODKA.getRegistryName());
         jojotable = new ItemBlock(BlockInit.JOJOTABLE).setRegistryName(BlockInit.JOJOTABLE.getRegistryName());
         
-        rune_commun = new RuneItem("rune_commun");
-        rune_rare = new RuneItem("rune_rare");
-        rune_epique = new RuneItem("rune_epique");
-        rune_mythique = new RuneItem("rune_mythique");
-        rune_unique = new RuneItem("rune_unique");
+        rune_commun = new RuneItem("rune_commun", EnumItemRarity.Commun);
+        rune_rare = new RuneItem("rune_rare", EnumItemRarity.Rare);
+        rune_epique = new RuneItem("rune_epique", EnumItemRarity.Epique);
+        rune_mythique = new RuneItem("rune_mythique", EnumItemRarity.Mythique);
+        rune_unique = new RuneItem("rune_unique", EnumItemRarity.Unique);
         
         rune_commun_unpolished = new RuneUnpolishedItem("rune_commun_unpolished", rune_commun);
         rune_rare_unpolished = new RuneUnpolishedItem("rune_rare_unpolished", rune_rare);
