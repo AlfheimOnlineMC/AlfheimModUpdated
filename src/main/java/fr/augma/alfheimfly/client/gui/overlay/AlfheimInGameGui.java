@@ -49,10 +49,6 @@ public class AlfheimInGameGui extends GuiIngameForge {
 		}
 		
 		if(this.getItemInMainHand().getItem() instanceof AlfheimItemSword) this.renderItemXp(this.getItemInMainHand());
-
-		if(mc.pointedEntity != null) {
-			renderInteract();
-		}
 	}
 	
 	private void bind(ResourceLocation res) {
@@ -77,11 +73,6 @@ public class AlfheimInGameGui extends GuiIngameForge {
 		Gui.drawModalRectWithCustomSizedTexture(getResolution().getScaledWidth() - 125, getResolution().getScaledHeight() - 17, 0, 0, currentWidth, 7, 100, 7);
 
 		GlStateManager.popMatrix();
-	}
-
-	private void renderInteract() {
-		this.drawString(mc.fontRenderer, mc.pointedEntity.getName(), getResolution().getScaledWidth() / 2 + 15, getResolution().getScaledHeight() / 2, 0xffffff);
-		this.drawString(mc.fontRenderer, "Press KEY to interact" + mc.pointedEntity, getResolution().getScaledWidth() / 2 + 15, getResolution().getScaledHeight() / 2 + 10, 0xffffff);
 	}
 	
 	private void renderHealthBar(int width, int height) {
