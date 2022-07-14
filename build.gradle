@@ -93,7 +93,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     shade fg.deobf('software.bernie.geckolib:forge-1.12.2-geckolib:3.0.0-beta.7')
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    shade fileTree(dir: "libs", include: ["*.jar"])
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
