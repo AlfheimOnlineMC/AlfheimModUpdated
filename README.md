@@ -1,104 +1,104 @@
- # Minecraft Mod 1.12.2
-🔨 AlfheimMod est un mod Minecraft 1.12.2 inspiré par l'animé Sword Art Online, ce mod utilise l'API <a href="http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html" target="_blank">Forge 1.12.2-2860</a>.
+# Minecraft Mod 1.12.2
+🔨 AlfheimMod is a Minecraft 1.12.2 mod inspired by the anime Sword Art Online, this mod uses the API <a href="http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html" target="_blank">Forge 1.12.2-2860</a>.
 
-Celui ci rajoute différentes fonctionnalité comme :
+This one adds various features such as :
 
-* [Des nouvelles Entitées / Mobs avec animation](#entités--mobs)
-* [De nouveau item ( épée, nourriture et autre )](#items-consommable--outils)
-* [Nouvelles armure en model3D](#armures-3d)
-* [Amélioration des épées en tuant certaines entitées / Mobs](#amélioration-dépée)
-* [Modification du model3D du joueur](#modification-du-model3d-du-joueur)
-* [Nouvelle Interface joueur](#interface-joueur)
+* [New entities / Mobs](#entities--mobs)
+* [New items ( Sword, food and more )](#items-consumable--tools)
+* [New armor with 3D model](#3d-armors)
+* [Improving swords by killing certain entities / Mobs](#upgradable-sword)
+* [Modification of the player's 3D model](#modification-of-the-player's-3d-model)
+* [New Player Interface](#player-interface)
 
-## Entités / Mobs
+## Entities / Mobs
 <p align="center">
 <img width="400px" src="https://cdn.discordapp.com/attachments/803395318803857480/809517652493598790/SPOILER_spoil_Sanglier.png" alt="boar">
 <img width="400px" src="https://cdn.discordapp.com/attachments/602222570225270805/821552833756921856/unknown.png" alt="deer">
 </p>
 
-Ces mobs utilise la librairie <a href="https://geckolib.com" target="_blank">GeckoLib</a> afin de les animer et modelisé via le logiciel <a href="https://blockbench.net" target="_blank">Blockbench</a>.
+These mobs use the <a href="https://geckolib.com" target="_blank">GeckoLib</a> library in order to animate and model them via the software <a href="https://blockbench.net" target="_blank">Blockbench</a>.
 
-Model3D, texture et animation : <a href="https://github.com/Xenap" target="_blank">Xenap</a>
+3D model, texture and animation : <a href="https://github.com/Xenap" target="_blank">Xenap</a>
 <br>
-Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a>
+Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Augma</a>
 
-## Items consommable / outils
+## Items consumable / tools
 
 <img align="left" style="margin-right: 5px" width="150;" src="https://cdn.discordapp.com/attachments/602222570225270805/821545404448636928/unknown.png">
 <p>
-Épée améliorable en tuant les différents mobs du jeu.
+Sword upgradeable by killing various mobs.
 
-Model3D et texture par : Iruuyami <br>
-Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a></p><br><br><br>
+3D model and texture by : Iruuyami <br>
+Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Augma</a></p><br><br><br>
 <hr>
 <img align="left" style="margin-right: 5px" width="400" src="https://cdn.discordapp.com/attachments/602222570225270805/821547575484219412/unknown.png" alt="consommable">
 <p>
-Consommables et item dropable sur le sanglier ci-dessus en le tuant
+Consumables and dropable items on the above boar when killing it
 
-Model3D, texture et animation : <a href="https://github.com/Xenap" target="_blank">Xenap</a>
+3D model, texture and animation : <a href="https://github.com/Xenap" target="_blank">Xenap</a>
 <br>
-Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a>
+Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Augma</a>
 </p>
 <br>
 
 
-## Armures 3D
+## 3D Armors
 
 <p align="center"><img width="150" src="https://cdn.discordapp.com/attachments/602222570225270805/821548802195849280/unknown.png" alt="armure1">
 <img width="150" src="https://cdn.discordapp.com/attachments/602222570225270805/821550424368087050/unknown.png" alt="armure2">
 <img width="150" src="https://cdn.discordapp.com/attachments/602222570225270805/821550967249174529/unknown.png" alt="chapka"></p>
 <p>
-Model3D et texture : <a href="https://github.com/Xenap" target="_blank">Xenap</a>
+3D model and texture : <a href="https://github.com/Xenap" target="_blank">Xenap</a>
 <br>
-Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a></p>
+Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Augma</a></p>
 
-## Amélioration d'épée
+## Upgradable sword
 
 <img src="https://cdn.discordapp.com/attachments/803395318803857480/812360413726507068/unknown.png" alt="amelioration">
-<p>Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a></p>
+<p>Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Augma</a></p>
 
-## Modification du model3D du joueur
+## Modification of the player's 3D model
 
-Rajout d'une queue si le joueur est de la race Cait Sith
+Addition of a tail if the player is of the Cait Sith race
 
 <img src="https://cdn.discordapp.com/attachments/602222570225270805/821719313504403476/unknown.png" alt="queue">
 <p>
-Model et texture : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a>, <a href="https://github.com/Xenap" target="_blank">Xenap</a>
+Model and texture : <a href="https://github.com/AkumaSama" target="_blank">Augma</a>, <a href="https://github.com/Xenap" target="_blank">Xenap</a>
 <br>
-Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a>
+Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Augma</a>
 </p>
 
 <hr>
 
-Rajout d'oreille style "Elfique"
+"Elvish" style ear additions
 
 <img width="150" src="https://cdn.discordapp.com/attachments/602222570225270805/821720099487875072/unknown.png" alt="oreille">
 
 <p>
-Model et texture : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a>, <a href="https://github.com/Xenap" target="_blank">Xenap</a>
+Model and texture : <a href="https://github.com/AkumaSama" target="_blank">Augma</a>, <a href="https://github.com/Xenap" target="_blank">Xenap</a>
 <br>
-Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a>
+Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Augma</a>
 </p>
 
-## Interface joueur
+## Player interface
 
-Interface de sélection de race
+Race selection interface
 
 <img src="https://cdn.discordapp.com/attachments/803395318803857480/806892856899403796/spoil_race.png" alt="select_race">
 
 <hr>
 
-Affichage de la vie du joueur ainsi que sa statistique de faim et une future barre de mana
+Display of the player's life and hunger statistics and a future mana bar
 
 <img src="https://cdn.discordapp.com/attachments/602222570225270805/821721468080881705/unknown.png" alt="life_bar">
 
 <hr>
 
-Interface en lien avec [l'amélioration d'item](#amélioration-dépée), ceci s'affiche en jeu lorsque le joueur porte en main une épée améliorable et lui permet de ne pas avoir à aller dans son inventaire pour avoir ces informations.
+Interface related to [sword improvement](#upgradable-sword), this is displayed in-game when the player is holding an upgradeable sword and allows them to avoid having to go into their inventory to get this information.
 
 <img src="https://cdn.discordapp.com/attachments/602222570225270805/821721960961671178/unknown.png" alt="item_exp">
 
 <p>
 Texture : <a href="https://github.com/Xenap" target="_blank">Xenap</a><br>
-Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Théo Thierry</a>
+Implémentation : <a href="https://github.com/AkumaSama" target="_blank">Augma</a>
 </p>
