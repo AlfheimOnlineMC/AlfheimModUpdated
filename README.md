@@ -1,5 +1,5 @@
  # Minecraft Mod 1.12.2
-🔨 AlfheimMod est un mod Minecraft 1.12.2 inspiré par l'animé Sword Art Online, ce mod utilise l'API <a href="http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html" target="_blank">Forge 1.12.2-2838</a>.
+🔨 AlfheimMod est un mod Minecraft 1.12.2 inspiré par l'animé Sword Art Online, ce mod utilise l'API <a href="http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html" target="_blank">Forge 1.12.2-2860</a>.
 
 Celui ci rajoute différentes fonctionnalité comme :
 
