@@ -51,7 +51,8 @@ public class CommonEventHandler {
 
 	private static IPlayerDataCap cap;
 	public static List<String> caitPlayerServ = new ArrayList<>();
-	
+	public static final HashMap<UUID, Float> damageBuffer = new HashMap<>();
+
 	@SubscribeEvent
     public static void onAttachCapability(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof EntityPlayer) event.addCapability(PlayerDataCapProvider.NAME, new PlayerDataCapProvider());
@@ -150,8 +151,6 @@ public class CommonEventHandler {
 					dmgMultiplier = player.getEntityAttribute(RuneUtils.CRIT_DMG).getAttributeValue() - 1D,
 					lifeSteal = player.getEntityAttribute(RuneUtils.LIFE_STEAL).getAttributeValue();
 
-			System.out.println(lifeSteal);
-
 			if(dmgMultiplier == 0D) {
 				dmgMultiplier = 1.1D;
 			}
@@ -164,7 +163,8 @@ public class CommonEventHandler {
 				player.sendMessage(new TextComponentString("Vous avez été heal de " + (e.getAmount() * lifeSteal) + " HP"));
 				player.heal((float) (e.getAmount() * lifeSteal));
 			}
-			//System.out.println(e.getAmount());
+
+			CommonEventHandler.damageBuffer.put(player.getUniqueID(), e.getAmount());
 		}
 	}
 
@@ -174,11 +174,10 @@ public class CommonEventHandler {
 			double def_pene = 0D;
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 
-
-			double dmg = DamageCalculatorHelper.getDamage(event.getEntityLiving(), event.getSource(), event.getBrutDmg(), player.getEntityAttribute(RuneUtils.DEF_PENE).getAttributeValue());
-			System.out.println(event.getAmount());
+			double dmg = DamageCalculatorHelper.getDamage(event.getEntityLiving(), event.getSource(), CommonEventHandler.damageBuffer.get(player.getUniqueID()), player.getEntityAttribute(RuneUtils.DEF_PENE).getAttributeValue());
 			event.setAmount((float) dmg);
-			System.out.println(event.getAmount());
+
+			CommonEventHandler.damageBuffer.remove(player.getUniqueID());
 		}
 	}
 
