@@ -2,7 +2,6 @@ package fr.augma.alfheimfly.packet;
 
 import fr.augma.alfheimfly.capabilities.IPlayerDataCap;
 import fr.augma.alfheimfly.capabilities.PlayerDataCapProvider;
-import fr.augma.alfheimfly.client.AlfheimClient;
 import fr.augma.alfheimfly.client.gui.overlay.AlfheimInGameGui;
 import fr.augma.alfheimfly.utils.race.AlfheimRace;
 import io.netty.buffer.ByteBuf;
@@ -44,7 +43,6 @@ public class SCPacketDataCap implements IMessage {
             IPlayerDataCap cap = PlayerDataCapProvider.get(Minecraft.getMinecraft().player);
             AlfheimRace race = cap.getRace();
             if(race != null) {
-            	AlfheimClient.setRPC(Minecraft.getMinecraft().player.getName() + " " + race.getName());
             	AlfheimInGameGui.setLogo(race.getIcone());
             }
             return null;

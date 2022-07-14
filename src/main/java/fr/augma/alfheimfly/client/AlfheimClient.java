@@ -25,11 +25,6 @@ import org.apache.commons.io.IOUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
-import com.jagrosh.discordipc.IPCClient;
-import com.jagrosh.discordipc.IPCListener;
-import com.jagrosh.discordipc.entities.RichPresence;
-import com.jagrosh.discordipc.exceptions.NoDiscordClientException;
-
 import fr.augma.alfheimfly.client.gui.GuiIngameMenuCustom;
 import fr.augma.alfheimfly.client.gui.overlay.AlfheimInGameGui;
 import fr.augma.alfheimfly.client.player.layer.LayerCaitSithTail;
@@ -51,7 +46,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 
 public class AlfheimClient extends AlfheimCommon {
-	private static IPCClient client;
+
 	private static final ResourceLocation[] wings = new ResourceLocation[18];
 
 	private static final Comparator<String> comparator = new Comparator<String>() {
@@ -60,35 +55,6 @@ public class AlfheimClient extends AlfheimCommon {
 			return I18n.translateToLocal("attribute.name.alfheim." + o1).compareTo(I18n.translateToLocal("attribute.name.alfheim." + o2));
 		}
 	};
-
-	public static void setRPC(String details) {
-		if(client == null) {
-			client = new IPCClient(801084290866610186L);
-			client.setListener(new IPCListener(){
-			    @Override
-			    public void onReady(IPCClient client) {
-			        client.sendRichPresence(getRPC(details));
-			    }
-			});
-			try {
-				client.connect();
-			} catch (NoDiscordClientException | RuntimeException e) {
-				client = null;
-			}
-		} else {
-			client.sendRichPresence(getRPC(details));
-		}
-	}
-	
-	private static RichPresence getRPC(String details) {
-		RichPresence.Builder builder = new RichPresence.Builder();
-        builder.setState("Coming soon ...")
-            .setDetails(details)
-            .setLargeImage("alo")
-        	.setButton1("Discord", "https://discord.gg/Yw9ZN6bMU3")
-        	.setButton2("Site", "https://letmegooglethat.com/?q=Il+est+en+dev");
-        return builder.build();
-	}
 	
 	@Override
 	public void preinit(File configfile) {
@@ -99,7 +65,6 @@ public class AlfheimClient extends AlfheimCommon {
 		MinecraftForge.EVENT_BUS.register(this);
 		RenderHandler.registerEntityRenders();
 		RenderHandler.registerArmorRenderer();
-		setRPC("ALO mmorpg mc [fr]");
 	}
 
 	@Override
