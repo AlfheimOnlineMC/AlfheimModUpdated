@@ -11,8 +11,11 @@ import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import fr.augma.alfheimfly.AlfheimFly;
 import fr.augma.alfheimfly.items.AlfheimItemSword;
+import fr.augma.alfheimfly.packet.ToggleFlyPacket;
 import fr.augma.alfheimfly.utils.RuneUtils;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -21,6 +24,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -48,6 +53,7 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 public class AlfheimClient extends AlfheimCommon {
 
 	private static final ResourceLocation[] wings = new ResourceLocation[18];
+	public static KeyBinding keyWings = new KeyBinding("Activate wings", Keyboard.KEY_P, "Alfheim Online");
 
 	private static final Comparator<String> comparator = new Comparator<String>() {
 		@Override
@@ -65,6 +71,7 @@ public class AlfheimClient extends AlfheimCommon {
 		MinecraftForge.EVENT_BUS.register(this);
 		RenderHandler.registerEntityRenders();
 		RenderHandler.registerArmorRenderer();
+		ClientRegistry.registerKeyBinding(keyWings);
 	}
 
 	@Override
@@ -104,6 +111,13 @@ public class AlfheimClient extends AlfheimCommon {
 		e.getToolTip().clear();
 		this.displayStats(e, Keyboard.isKeyDown(Keyboard.KEY_LSHIFT));
 		e.getToolTip().add(ChatFormatting.BLUE + "Alfheim Online MMORPG");
+	}
+
+	@SubscribeEvent
+	public void onKeyPressed(InputEvent.KeyInputEvent event) {
+		if(keyWings.isPressed()) {
+			AlfheimFly.network.sendToServer(new ToggleFlyPacket());
+		}
 	}
 
 	private void displayStats(ItemTooltipEvent e, boolean rune) {
