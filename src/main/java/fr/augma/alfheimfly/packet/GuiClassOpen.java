@@ -24,7 +24,13 @@ public class GuiClassOpen implements IMessage {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public IMessage onMessage(GuiClassOpen message, MessageContext ctx) {
-			Minecraft.getMinecraft().displayGuiScreen(new GuiScreenClassChoice());
+			Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+				@Override
+				public void run() {
+					Minecraft.getMinecraft().displayGuiScreen(new GuiScreenClassChoice());
+				}
+			});
+
  			return null;
 		}
 	}
