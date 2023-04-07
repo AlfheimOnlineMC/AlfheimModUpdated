@@ -1,6 +1,5 @@
 package fr.augma.alfheimfly.client.armor.custom;
 
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
@@ -18,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
+import software.bernie.geckolib3.core.util.Color;
 import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
