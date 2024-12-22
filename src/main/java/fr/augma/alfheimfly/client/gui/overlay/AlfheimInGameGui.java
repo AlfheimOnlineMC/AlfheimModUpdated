@@ -80,7 +80,6 @@ public class AlfheimInGameGui extends GuiIngameForge {
 		GlStateManager.scale(0.75f, 0.75f, 0.75f);
 		this.drawString(getFontRenderer(), this.mc.player.getName(), 74, 21, 0xffffff);
 		GlStateManager.popMatrix();
-
 		GlStateManager.pushMatrix();
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
