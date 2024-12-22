@@ -39,24 +39,19 @@ import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = AlfheimRef.MODID, name = AlfheimRef.NAME, version = AlfheimRef.VERSION)
+@Mod(modid = AlfheimRef.MODID, name = AlfheimRef.NAME, version = AlfheimRef.VERSION, dependencies = "required-after:geckolib3;")
 public class AlfheimFly {
 
     public static Logger logger;
-    
     public static Map<String, Float> expEntityValue = new HashMap<>();
 
     @Mod.Instance
     public static AlfheimFly INSTANCE;
-    
-    
 
     @SidedProxy(clientSide = AlfheimRef.CLIENT_PROXY, serverSide = AlfheimRef.SERVER_PROXY)
     public static AlfheimCommon PROXY;
-    
     public static SimpleNetworkWrapper network;
     public static SimpleNetworkWrapper network2;
-    
     public static CreativeTabs ALFHEIM_TAB = new AlfheimTab(AlfheimRef.CREATIVE_TAB);
 
     @EventHandler
